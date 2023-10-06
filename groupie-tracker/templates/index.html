@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gropie-tracker</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav">
+            <a class="navbar-brand" href="/">
+                <h1>GROUPIE-TRACKER</h1>
+            </a>
+            <!-- SearchBar -->
+            <div class="fullscreenSearch">
+                <button class="openBtn" onclick="openSearch()">
+                    <img class="imgBtn" src="img/search.png" alt="Search" />
+                </button>
+            </div>    
+            <!-- SearchBar Done -->
+        </div>
+    </nav>
+
+    <main>
+        <div id="myOverlay" class="overlay">
+            <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+            <div class="overlay-content">
+                <form action="/" method="POST">
+                    <input type="text" placeholder="Search.." name="search" id="searchInput" list="datalistOptions">
+                    <datalist id="datalistOptions">
+                        {{range $option , $tag := .Datalist}}
+                        <option value="{{$option}}{{$tag}}"></option>
+                        {{end}}
+                    </datalist>
+                    <button type="submit">Search</button>
+                </form>
+                
+                
+
+                
+                <!-- <form action="/" method="POST">
+                    
+                    <div class="CreationDate">
+                        <div class="CreationDate_label">
+                            <label for="CreationDate">CREATION DATE</label>
+                        </div>
+                        <div class="range_container">
+                            <div class="sliders_control" id="CreationDate">
+                                <input id="fromSlider" type="range" value="1958" min="1958" max="2015"/>
+                                <input id="toSlider" type="range" value="2015" min="1958" max="2015"/>
+                            </div>
+                            <div class="form_control">
+                                <div class="form_control_container">
+                                    <div class="form_control_container__time">From:</div>
+                                    <input class="form_control_container__time__input" type="number" id="fromInput" value="1958" min="1958" max="2015"/>
+                                </div>
+                                <div class="form_control_container">
+                                    <div class="form_control_container__time">To:</div>
+                                    <input class="form_control_container__time__input" type="number" id="toInput" value="2015" min="1958" max="2015"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="firstAlbum">
+                        <div class="firstAlbumDate_label">
+                            <label for="firstAlbumDate">FIRST ALBUM DATE</label>
+                        </div>
+                        <div class="firstAlbumDate_input">
+                            <input type="date" id="firstAlbumDate" name="firstAlbumDate">
+                        </div>
+                    </div>
+                    
+                    <div class="members_filter">
+                        <label class="members_label" for="members_filter">NUMBER OF MEMBERS:</label>
+                        <input type="checkbox" name="member1" id="member1">
+                        <label for="member1">1</label>
+                        <input type="checkbox" name="member2" id="member2">
+                        <label for="member2">2</label>
+                        <input type="checkbox" name="member3" id="member3">
+                        <label for="member3">3</label>
+                        <input type="checkbox" name="member4" id="member4">
+                        <label for="member4">4</label>
+                        <input type="checkbox" name="member5" id="member5">
+                        <label for="member5">5</label>
+                        <input type="checkbox" name="member6" id="member6">
+                        <label for="member6">6</label>
+                        <input type="checkbox" name="member7" id="member7">
+                        <label for="member7">7</label>
+                        <input type="checkbox" name="member8" id="member8">
+                        <label for="member8">8</label>
+                    </div>
+                    
+                    <div class="location"></div>
+                    <button type="submit">Apply</button>
+                </form> -->
+            </div>
+        </div>
+
+        {{if .Artists}}
+        <div class="main"> 
+            <ul>
+                {{range $index ,$artist := .Artists}}
+                <li>
+                    <a class="center" href="/artist/{{$artist.ID}}">
+                        <div class="container">
+                            <h1>{{.Name}}</h1>
+                            <div class="center">
+                                <img src="{{.Image}}" alt="{{.Name}}">
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                {{end}}
+                {{else}}
+                <div class="message-container">
+                     <h1><p>No artists found.</p></h1>
+                 </div>
+                {{end}}
+            </ul>
+        </div>   
+    </main>
+
+    <footer>
+        <p>Author: yotarov</p>
+    </footer> 
+
+    <script>
+
+        function openSearch() {
+          document.getElementById("myOverlay").style.display = "block";
+        }
+        function closeSearch() {
+          document.getElementById("myOverlay").style.display = "none";
+        }
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+        function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
+            const [from, to] = getParsed(fromInput, toInput);
+            fillSlider(fromInput, toInput, '#C6C6C6', '#fa6930', controlSlider);
+            if (from > to) {
+                fromSlider.value = to;
+                fromInput.value = to;
+            } else {
+                fromSlider.value = from;
+            }
+        }
+    
+        function controlToInput(toSlider, fromInput, toInput, controlSlider) {
+            const [from, to] = getParsed(fromInput, toInput);
+            fillSlider(fromInput, toInput, '#C6C6C6', '#fa6930', controlSlider);
+            setToggleAccessible(toInput);
+            if (from <= to) {
+                toSlider.value = to;
+                toInput.value = to;
+            } else {
+                toInput.value = from;
+            }
+        }
+
+        function controlFromSlider(fromSlider, toSlider, fromInput) {
+        const [from, to] = getParsed(fromSlider, toSlider);
+        fillSlider(fromSlider, toSlider, '#C6C6C6', '#fa6930', toSlider);
+        if (from > to) {
+            fromSlider.value = to;
+            fromInput.value = to;
+        } else {
+            fromInput.value = from;
+        }
+        }
+
+        function controlToSlider(fromSlider, toSlider, toInput) {
+        const [from, to] = getParsed(fromSlider, toSlider);
+        fillSlider(fromSlider, toSlider, '#C6C6C6', '#fa6930', toSlider);
+        setToggleAccessible(toSlider);
+        if (from <= to) {
+            toSlider.value = to;
+            toInput.value = to;
+        } else {
+            toInput.value = from;
+            toSlider.value = from;
+        }
+        }
+
+        function getParsed(currentFrom, currentTo) {
+        const from = parseInt(currentFrom.value, 10);
+        const to = parseInt(currentTo.value, 10);
+        return [from, to];
+        }
+
+        function fillSlider(from, to, sliderColor, rangeColor, controlSlider) {
+            const rangeDistance = to.max-to.min;
+            const fromPosition = from.value - to.min;
+            const toPosition = to.value - to.min;
+            controlSlider.style.background = `linear-gradient(
+            to right,
+            ${sliderColor} 0%,
+            ${sliderColor} ${(fromPosition)/(rangeDistance)*100}%,
+            ${rangeColor} ${((fromPosition)/(rangeDistance))*100}%,
+            ${rangeColor} ${(toPosition)/(rangeDistance)*100}%, 
+            ${sliderColor} ${(toPosition)/(rangeDistance)*100}%, 
+            ${sliderColor} 100%)`;
+        }
+
+        function setToggleAccessible(currentTarget) {
+        const toSlider = document.querySelector('#toSlider');
+        if (Number(currentTarget.value) <= 0 ) {
+            toSlider.style.zIndex = 2;
+        } else {
+            toSlider.style.zIndex = 0;
+        }
+        }
+
+        const fromSlider = document.querySelector('#fromSlider');
+        const toSlider = document.querySelector('#toSlider');
+        const fromInput = document.querySelector('#fromInput');
+        const toInput = document.querySelector('#toInput');
+        fillSlider(fromSlider, toSlider, '#C6C6C6', '#fa6930', toSlider);
+        setToggleAccessible(toSlider);
+
+        fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput);
+        toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
+        fromInput.oninput = () => controlFromInput(fromSlider, fromInput, toInput, toSlider);
+        toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
+    </script>
+</body>
+</html>
