@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Ascii-Art-Web</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/pageStyle.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+   
+
+</head>
+<body class="body_main">
+    <div class="head">
+    <div class="maintxt"> 
+        <h1>Ascii-Art-Web</h1>
+        <form id="asciiForm" method="POST" action="/ascii-art">
+        <textarea class="text_input" type="text" name="inputValue" placeholder="Text Input"></textarea>
+        <div class="buttons">
+             <input class="submit_button" type="submit" name="" value="Get Result">
+        <select class="banner_button" name="banner" id="banner">
+            <option class="option_standard" value="standard">Standard</option>
+            <option class="option_shadow" value="shadow">Shadow</option>
+            <option class="option_thinkertoy" value="thinkertoy">Thinkertoy</option>
+        </select>
+        <div class="buttons">
+            <input class="export_button" type="submit" name="" value="Export File" formaction="/export">
+        </div>                
+        </form>
+    </div>  
+    </div>
+    <div class="output" id="res">
+        <pre>{{.}}</pre>
+    </div>  
+
+    <script>
+        document.getElementById('asciiForm').addEventListener('submit', function(event) {
+            var textArea = document.querySelector('.text_input');
+            if (textArea.value.trim() === '') {
+                event.preventDefault();
+                alert('Text area is empty!');
+            }
+        });
+    </script>
+
+</body>
+</html>
