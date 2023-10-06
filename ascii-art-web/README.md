@@ -18,7 +18,9 @@ Follow the link on the terminal:
 Running server on http://localhost:8080 
 ```
 
-Enjoy!
+Enjoy! 
+
+P.S. You can use only latin letters as an input.
 
 <br>
 
