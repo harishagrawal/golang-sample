@@ -25,51 +25,5 @@ func CommandFix(input []string) []string {
 		}
 	}
 
-
-	// (up) (up, jddc)
-	// (up,
-
-	// up := regexp.MustCompile(`\(([^)]*up[^)]*)\)`)
-
-	// res := up.ReplaceAllFunc(input, func(match []byte) []byte {
-	// 	if bytes.Contains(match, []byte("up")) {
-	// 		return bytes.ReplaceAll(match, []byte(" "), []byte(""))
-	// 	}
-	// 	return match
-	// })
-
-	// hex := regexp.MustCompile(`\(([^)]*hex[^)]*)\)`)
-
-	// res = hex.ReplaceAllFunc(res, func(match []byte) []byte {
-	// 	if bytes.Contains(match, []byte("hex")) {
-	// 		return bytes.ReplaceAll(match, []byte(" ")2
-	// })
-
-	// bin := regexp.MustCompile(`\(([^)]*bin[^)]*)\)`)
-
-	// res = bin.ReplaceAllFunc(res, func(match []byte) []byte {
-	// 	if bytes.Contains(match, []byte("bin")) {
-	// 		return bytes.ReplaceAll(match, []byte(" "), []byte(""))
-	// 	}
-	// 	return match
-	// })
-
-	// low := regexp.MustCompile(`\(([^)]*low[^)]*)\)`)
-
-	// res = low.ReplaceAllFunc(res, func(match []byte) []byte {
-	// 	if bytes.Contains(match, []byte("low")) {
-	// 		return bytes.ReplaceAll(match, []byte(" "), []byte(""))
-	// 	}
-	// 	return match
-	// })
-
-	// cap := regexp.MustCompile(`\(([^)]*cap[^)]*)\)`)
-
-	// res = cap.ReplaceAllFunc(res, func(match []byte) []byte {
-	// 	if bytes.Contains(match, []byte("cap")) {
-	// 		return bytes.ReplaceAll(match, []byte(" "), []byte(""))
-	// 	}
-	// 	return match
-	// })
 	return input
 }
